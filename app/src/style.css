@@ -1,0 +1,243 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smoothly crossfade colors when the theme is toggled. The class is added to
+   <html> only for the duration of the switch (see AppSidebar), so it never
+   interferes with normal hover/interaction transitions. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    fill 0.35s ease,
+    stroke 0.35s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none !important;
+  }
+}
+
+@theme {
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    'Liberation Mono', monospace;
+}
+
+/* The graph-paper backdrop from the original infographics */
+:root {
+  --gp-bg: #fafaf9;
+  --gp-line: rgb(15 23 42 / 0.05);
+  --sb-thumb: rgb(212 212 216); /* zinc-300 */
+}
+.dark {
+  --gp-bg: #0b0c0f;
+  --gp-line: rgb(148 163 184 / 0.07);
+  --sb-thumb: rgb(63 63 70); /* zinc-700 */
+}
+
+/* Scrollable but with no visible scrollbar (code panel) */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Slim, theme-adaptive scrollbar (sidebar, main page) */
+@utility slim-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-thumb) transparent;
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb);
+    border-radius: 9999px;
+  }
+}
+
+@utility graph-paper {
+  background-color: var(--gp-bg);
+  background-image:
+    linear-gradient(to right, var(--gp-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--gp-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ---- language-switch transitions ---- */
+
+.title-swap-enter-active,
+.title-swap-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.title-swap-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.title-swap-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.fade-swap-enter-active,
+.fade-swap-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-swap-enter-from,
+.fade-swap-leave-to {
+  opacity: 0;
+}
+
+/* annotation cards fly in from their side, staggered via --stagger */
+.cards-left-enter-active,
+.cards-right-enter-active {
+  transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--stagger, 0) * 50ms);
+}
+.cards-left-leave-active,
+.cards-right-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  position: absolute;
+  width: 100%;
+}
+.cards-left-enter-from {
+  opacity: 0;
+  transform: translateX(-28px) scale(0.96);
+}
+.cards-right-enter-from {
+  opacity: 0;
+  transform: translateX(28px) scale(0.96);
+}
+.cards-left-leave-to,
+.cards-right-leave-to {
+  opacity: 0;
+  transform: scale(0.94);
+}
+.cards-left-move,
+.cards-right-move {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Code content crossfade. Opacity only — NO vertical translate: the code
+   lines must not slide while fading, or the connector lines (which anchor to
+   line positions) chase the moving text and appear to stutter/snap. */
+.code-swap-enter-active {
+  transition: opacity 0.25s ease 0.05s;
+}
+.code-swap-leave-active {
+  transition: opacity 0.15s ease;
+}
+.code-swap-enter-from,
+.code-swap-leave-to {
+  opacity: 0;
+}
+
+/* Party mode: the green traffic-light turns the concept mockup into a
+   rainbow-cycling, gently bouncing disco. */
+@keyframes mockup-party {
+  0% {
+    filter: hue-rotate(0deg) saturate(1.5);
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-1.2deg) scale(1.02);
+  }
+  50% {
+    filter: hue-rotate(180deg) saturate(1.7);
+    transform: rotate(1.2deg) scale(1.02);
+  }
+  75% {
+    transform: rotate(-0.6deg) scale(1.01);
+  }
+  100% {
+    filter: hue-rotate(360deg) saturate(1.5);
+    transform: rotate(0deg) scale(1);
+  }
+}
+.mockup-party {
+  animation: mockup-party 2.4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mockup-party {
+    animation: none;
+    filter: hue-rotate(90deg) saturate(1.5);
+  }
+}
+
+/* Playful shake when the red "close" traffic-light is clicked. */
+@keyframes code-shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-5px) rotate(-0.5deg); }
+  30% { transform: translateX(5px) rotate(0.5deg); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+.code-shake {
+  animation: code-shake 0.45s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-shake {
+    animation: none;
+  }
+}
+
+/* ---- detail dialog ---- */
+
+@keyframes dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Centering is handled by inset-0 + margin:auto, so the entrance animates
+   only scale/opacity from the element's own center — no translate, so it
+   never appears off-center and snaps back. */
+@keyframes dialog-content-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+[data-dialog-overlay][data-state='open'] {
+  animation: dialog-overlay-in 0.2s ease;
+}
+[data-dialog-content][data-state='open'] {
+  animation: dialog-content-in 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-dialog-overlay][data-state='closed'] {
+  animation: dialog-overlay-in 0.15s ease reverse forwards;
+}
+[data-dialog-content][data-state='closed'] {
+  animation: dialog-content-in 0.15s ease reverse forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*='-enter-active'],
+  [class*='-leave-active'],
+  [class*='-move'] {
+    transition: none !important;
+  }
+  [data-dialog-overlay],
+  [data-dialog-content] {
+    animation: none !important;
+  }
+}

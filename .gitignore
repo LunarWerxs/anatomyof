@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+Thumbs.db
+
+# Secrets / local env — never commit these
+.env
+.env.*
+!.env.example

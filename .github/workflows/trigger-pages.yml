@@ -1,0 +1,26 @@
+name: Trigger Pages deploy
+
+# On every push to main, ping the anatomyof.github.io repo to rebuild and
+# redeploy the live site. This is optional plumbing: it only fires if a
+# PAGES_DISPATCH_TOKEN secret (a PAT with `repo` scope on AnatomyOf/
+# anatomyof.github.io) is present. Without it, the step is skipped (green,
+# no noise) and the site still redeploys on the Pages repo's own schedule.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.PAGES_DISPATCH_TOKEN }}
+    steps:
+      - name: Notify Pages repo to rebuild
+        if: ${{ env.TOKEN != '' }}
+        run: |
+          curl -sS -X POST \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/AnatomyOf/anatomyof.github.io/dispatches \
+            -d '{"event_type":"build"}'

@@ -1,0 +1,258 @@
+import type { LanguageDef } from '../lib/types'
+
+export const ruby: LanguageDef = {
+  id: 'ruby',
+  popularity: 20,
+  name: 'Ruby',
+  titleWord: 'Ruby',
+  article: 'a',
+  extensions: ['.rb'],
+  accentHex: '#cc342d',
+  officialUrl: 'https://www.ruby-lang.org/',
+  shikiLang: 'ruby',
+  note: 'Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity, famous for the Ruby on Rails web framework.',
+  annotations: [
+    {
+      id: 'shebang',
+      title: 'Shebang',
+      body: 'Specifies the interpreter path.',
+      details:
+        'The shebang (`#!`) must be the very first line of the file. On Unix-like systems the kernel reads it to choose which interpreter runs the script — `/usr/bin/env ruby` asks `env` to find `ruby` on the current `PATH`, which is more portable than hard-coding a path like `/usr/bin/ruby`.\n\nIt is only consulted when the file is executed directly, e.g. `./script.rb` after `chmod +x`. Running the file with `ruby script.rb` ignores the shebang entirely, and Windows has no concept of it at all.',
+      learnMore: 'https://en.wikipedia.org/wiki/Shebang_(Unix)',
+      color: 'slate',
+      side: 'left',
+    },
+    {
+      id: 'comment',
+      title: 'Comment',
+      body: 'Single-line (`#`) or block (`=begin...=end`), ignored by the interpreter.',
+      details:
+        '`#` starts a comment that runs to the end of the line, the most common style in idiomatic Ruby. A `=begin`/`=end` pair brackets a block comment spanning multiple lines; both markers must start at the beginning of a line, with no leading whitespace.\n\nBlock comments are rarely used in practice — most style guides prefer stacking `#` lines even for long explanations, since `=begin`/`=end` are easy to misplace and some editors highlight them poorly. Both forms are stripped before execution and have no runtime effect.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/syntax/comments_rdoc.html',
+      color: 'blue',
+      side: 'right',
+    },
+    {
+      id: 'require',
+      title: 'Require statement',
+      body: 'Imports modules or libraries.',
+      details:
+        "`require 'date'` loads a standard library or gem by name, executing it once and caching the result so a second `require` of the same file is a no-op. `require_relative` does the same for a file path relative to the current file, which is the usual way to pull in another file from your own project.\n\nUnlike some languages, `require` is a normal method call, not special syntax — it can appear anywhere, though convention places all requires at the top of the file. Bundler and `Gemfile`s manage which gem versions are available to `require` in a given project.",
+      learnMore: 'https://docs.ruby-lang.org/en/master/Kernel.html#method-i-require',
+      color: 'sky',
+      side: 'right',
+    },
+    {
+      id: 'class',
+      title: 'Class definition',
+      body: 'Blueprint for objects (`class ... end`).',
+      details:
+        'A `class` block defines a new type; in Ruby, every value — including numbers, strings, and even classes themselves — is an object, and every object is an instance of some class. `class Person ... end` opens the class body, where method definitions, constants, and macro-like calls such as `attr_accessor` are evaluated.\n\nRuby classes are "open": reopening `class Person` later, even in another file, adds to the same class rather than redefining it. This lets libraries and application code alike patch existing classes (including Ruby\'s own built-ins), a flexibility that is powerful but easy to overuse.',
+      learnMore: 'https://en.wikipedia.org/wiki/Class_(computer_programming)',
+      color: 'green',
+      side: 'left',
+    },
+    {
+      id: 'attr-accessor',
+      title: 'Attribute accessor',
+      body: '`attr_accessor` generates getter and setter methods.',
+      details:
+        "`attr_accessor :name, :age` is shorthand for defining both a reader (`name`) and a writer (`name=`) method for each instance variable named, so `person.name` and `person.name = 'Alice'` both work without hand-writing the methods. `attr_reader` generates only the getter and `attr_writer` only the setter, for when one direction should stay private.\n\nUnder the hood these are just regular method definitions created at class-body evaluation time — `attr_accessor` is a plain method call (a common Ruby idiom sometimes called a 'macro'), not special syntax, and takes a comma-separated list of symbols.",
+      learnMore: 'https://docs.ruby-lang.org/en/master/Module.html#method-i-attr_accessor',
+      color: 'teal',
+      side: 'right',
+    },
+    {
+      id: 'initialize',
+      title: 'Constructor method',
+      body: 'The `initialize` method runs automatically when a new object is created.',
+      details:
+        '`Person.new("Alice", 30)` allocates a new object and calls its `initialize` method with the given arguments, so `initialize` is where you set up instance state. It is a regular instance method — the only thing special about it is that `.new` calls it for you and cannot be invoked directly.\n\n`initialize` is private by convention (Ruby marks it private automatically), reinforcing that objects should only be built through `.new`. Like any method it can take default arguments, keyword arguments, or a splat, giving `.new` the same flexible calling conventions as any other method.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/Class.html#method-i-new',
+      color: 'purple',
+      side: 'left',
+    },
+    {
+      id: 'instance-var',
+      title: 'Instance variable',
+      body: 'Data stored within an object instance, prefixed with `@`.',
+      details:
+        'A name starting with `@`, like `@name`, is an instance variable: it belongs to a specific object and lives as long as that object does. Instance variables need no declaration — referencing an unset one simply evaluates to `nil` — and they are invisible outside the object unless exposed through a method like an `attr_accessor`-generated getter.\n\nEach object keeps its own independent set of instance variables even when many objects share the same class, which is exactly how `alice = Person.new("Alice", 30)` and a second `Person` instance can hold different names without interfering with each other.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/syntax/assignment_rdoc.html#label-Variables',
+      color: 'red',
+      side: 'right',
+    },
+    {
+      id: 'method',
+      title: 'Method definition',
+      body: 'Defines a reusable block of code with `def ... end`.',
+      details:
+        'A `def` inside a class body defines an instance method, callable on any instance of that class; a `def` at the top level of a file defines a method on `Object` itself, effectively a global function. Either way the body runs until `end`, and the value of the last evaluated expression is returned automatically — an explicit `return` is only needed to exit early.\n\nRuby methods accept positional, keyword, default, and splat (`*args`) parameters, and because Ruby uses duck typing there are no parameter type declarations: any object responding to the right methods can be passed in.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html',
+      color: 'orange',
+      side: 'left',
+    },
+    {
+      id: 'string-interp',
+      title: 'String interpolation',
+      body: 'Embeds expressions in double-quoted strings using `#{}`.',
+      details:
+        '`"Hello, my name is #{@name}"` evaluates the expression inside `#{...}` and inserts its `to_s` representation directly into the surrounding string. Interpolation only works inside double-quoted strings (or `%Q{}`/heredocs) — single-quoted strings treat `#{}` as literal text.\n\nAny expression can go inside the braces, not just a variable name: method calls, arithmetic, and even multi-statement logic are all valid, e.g. `"Total: #{price * qty}"`. This is generally preferred over string concatenation with `+` for both readability and performance.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html#label-Strings',
+      color: 'amber',
+      side: 'right',
+    },
+    {
+      id: 'object-instantiation',
+      title: 'Object instantiation & method call',
+      body: 'Creating an instance and executing methods on it.',
+      details:
+        '`Person.new("Alice", 30)` creates a new `Person` object, passing its arguments through to `initialize`, and binds the result to the local variable `alice`. From then on, `alice.greet` looks up the `greet` method on `alice`\'s class and calls it with `alice` as the implicit receiver (`self` inside the method).\n\nMethod calls in Ruby can drop parentheses when unambiguous — `alice.greet` and `alice.greet()` are equivalent — and dot-chaining multiple calls together (`alice.greet.upcase`) is idiomatic for building small transformations out of simple methods.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/syntax/calling_methods_rdoc.html',
+      color: 'rose',
+      side: 'left',
+    },
+    {
+      id: 'conditional',
+      title: 'Control flow (conditional)',
+      body: 'Executes code based on a condition (`if`, `else`, `elsif`, `case`).',
+      details:
+        '`if ... else ... end` branches on truthiness; in Ruby only `nil` and `false` are falsy, so `0` and `""` (unlike in some other languages) both count as true. `elsif` chains additional conditions, and the whole construct evaluates to a value, so `x = if cond then a else b end` is valid.\n\nRuby also offers a trailing modifier form, `puts "big" if x > 10`, and `case`/`when` for matching a value against several patterns — often clearer than a long `elsif` chain. `unless` is the negated counterpart of `if`.',
+      learnMore: 'https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html',
+      color: 'indigo',
+      side: 'right',
+    },
+    {
+      id: 'loop',
+      title: 'Control flow (loop / iterator)',
+      body: 'Executes code repeatedly (`each`, `map`, ranges, blocks).',
+      details:
+        "`(1..3).each do |i| ... end` builds a `Range` and calls `each` on it, passing a block that runs once per element with `i` bound to the current value. Blocks (`do ... end` or `{ ... }`) are central to idiomatic Ruby: methods like `each`, `map`, and `select` take a block and `yield` to it internally, rather than the caller managing an explicit loop counter.\n\nRuby has `while` and `for` keywords too, but iterator methods with blocks are generally preferred, since they compose well and keep the loop variable's scope contained to the block. `|i|` is the block's parameter list, delimited by pipes rather than parentheses.",
+      learnMore: 'https://docs.ruby-lang.org/en/master/Enumerable.html#method-i-each',
+      color: 'pink',
+      side: 'left',
+    },
+  ],
+  examples: {
+    minimal: [
+      { code: "require 'json'", refs: ['require'] },
+      { code: '' },
+      {
+        code: 'class Book',
+        refs: ['class'],
+      },
+      {
+        code: '  attr_accessor :title, :pages',
+        refs: ['class', 'attr-accessor'],
+      },
+      { code: '', refs: ['class'] },
+      {
+        code: '  def initialize(title, pages)\n    @title = title\n    @pages = pages\n  end',
+        refs: ['class', 'initialize', 'instance-var'],
+      },
+      { code: '', refs: ['class'] },
+      {
+        code: '  def summary\n    # Matz designed Ruby to make programmers happy, not to count pages\n    "#{@title} (#{@pages}pp)"\n  end\nend',
+        refs: ['class', 'method', 'string-interp'],
+      },
+      { code: '' },
+      {
+        code: 'book = Book.new("Dune", 412)\nputs book.summary',
+        refs: ['object-instantiation'],
+      },
+      { code: '' },
+      {
+        code: '[1, 2, 3].each do |n|\n  puts "Book ##{n}" # everything is an object, even this loop\nend',
+        refs: ['loop', 'string-interp'],
+      },
+    ],
+    verbose: [
+      { code: '#!/usr/bin/env ruby', refs: ['shebang'] },
+      { code: '# This is a single-line comment', refs: ['comment'] },
+      { code: '' },
+      {
+        code: "=begin\nThis is a multi-line comment block\ndescribing the script's purpose.\nMatz is nice, so we are nice (MINASWAN).\n=end",
+        refs: ['comment'],
+      },
+      { code: '' },
+      { code: "require 'date' # Import a standard library module", refs: ['require'] },
+      { code: '' },
+      { code: '# Class definition', refs: ['class'] },
+      { code: 'class Person', refs: ['class'] },
+      {
+        code: '  attr_accessor :name, :age # Attribute accessor (creates getter/setter)',
+        refs: ['class', 'attr-accessor'],
+      },
+      { code: '', refs: ['class'] },
+      { code: '  # Constructor method', refs: ['class', 'initialize'] },
+      {
+        code: '  def initialize(name, age)',
+        refs: ['class', 'initialize'],
+      },
+      {
+        code: '    @name = name # Instance variable (starts with @)',
+        refs: ['class', 'initialize', 'instance-var'],
+      },
+      {
+        code: '    @age = age',
+        refs: ['class', 'initialize', 'instance-var'],
+      },
+      { code: '  end', refs: ['class', 'initialize'] },
+      { code: '', refs: ['class'] },
+      { code: '  # Instance method definition', refs: ['class', 'method'] },
+      { code: '  def greet', refs: ['class', 'method'] },
+      { code: '    # String interpolation', refs: ['class', 'method', 'string-interp'] },
+      {
+        code: '    "Hello, my name is #{@name} and I am #{@age} years old."',
+        refs: ['class', 'method', 'string-interp', 'instance-var'],
+      },
+      { code: '  end', refs: ['class', 'method'] },
+      { code: 'end', refs: ['class'] },
+      { code: '' },
+      { code: '# Top-level method', refs: ['method'] },
+      { code: 'def current_year', refs: ['method'] },
+      { code: '  Date.today.year', refs: ['method'] },
+      { code: 'end', refs: ['method'] },
+      { code: '' },
+      { code: '# Main execution block' },
+      {
+        code: 'puts "Starting script... no framework required, we\'re not making a Rails app today"',
+      },
+      { code: '' },
+      { code: '# Object instantiation', refs: ['object-instantiation'] },
+      {
+        code: 'alice = Person.new("Alice", 30)',
+        refs: ['object-instantiation'],
+      },
+      { code: '', refs: ['object-instantiation'] },
+      { code: '# Method call', refs: ['object-instantiation'] },
+      { code: 'puts alice.greet', refs: ['object-instantiation'] },
+      { code: '' },
+      { code: '# Control flow (conditional)', refs: ['conditional'] },
+      { code: 'if alice.age > 25', refs: ['conditional'] },
+      {
+        code: '  puts "#{alice.name} is older than 25."',
+        refs: ['conditional', 'string-interp'],
+      },
+      { code: 'else', refs: ['conditional'] },
+      {
+        code: '  puts "#{alice.name} is 25 or younger."',
+        refs: ['conditional', 'string-interp'],
+      },
+      { code: 'end', refs: ['conditional'] },
+      { code: '' },
+      { code: '# Control flow (loop over a range)', refs: ['loop'] },
+      { code: '(1..3).each do |i|', refs: ['loop'] },
+      {
+        code: '  puts "Count: #{i}"',
+        refs: ['loop', 'string-interp'],
+      },
+      { code: 'end', refs: ['loop'] },
+      { code: '' },
+      {
+        code: 'puts "Current year: #{current_year}"',
+        refs: ['string-interp'],
+      },
+    ],
+  },
+}
