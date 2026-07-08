@@ -58,7 +58,7 @@ function submit() {
     // Open the visitor's mail client, pre-addressed and pre-filled.
     const body = `Suggestion: ${suggestion.value.trim()}\nFrom: ${email.value.trim()}`
     window.location.href = `mailto:${SUGGEST_DEST_EMAIL}?subject=${encodeURIComponent(
-      'Anatomy of a File — suggestion',
+      'AnatomyOf — suggestion',
     )}&body=${encodeURIComponent(body)}`
     done.value = true
   } catch {

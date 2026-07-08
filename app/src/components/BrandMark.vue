@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// The Anatomy-of-a-File logo mark ({ brace + ribcage). Monochrome: fills with
+// The AnatomyOf logo mark ({ brace + ribcage). Monochrome: fills with
 // currentColor, so callers set the color via a text-* class and it adapts to
 // light/dark. Source of truth: public/logo.svg (regenerate via scripts/gen-brand).
 </script>

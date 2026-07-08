@@ -1,6 +1,6 @@
 # app
 
-The Vue 3 + Vite frontend for **Anatomy of a File**. See the [root README](../README.md)
+The Vue 3 + Vite frontend for **AnatomyOf**. See the [root README](../README.md)
 for what the project is, the stack, how to run it, and how to add a language.
 
 ```sh

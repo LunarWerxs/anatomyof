@@ -78,7 +78,7 @@ watch(
           <Menu class="size-5" />
         </button>
         <BrandMark class="size-5 shrink-0 text-zinc-900 dark:text-zinc-100" />
-        <span class="truncate text-sm font-extrabold tracking-tight">Anatomy of a File</span>
+        <span class="truncate text-sm font-extrabold tracking-tight">AnatomyOf</span>
         <a
           :href="repoUrl"
           target="_blank"

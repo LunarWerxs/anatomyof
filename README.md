@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://anatomyof.github.io">
-  <img src="app/public/og-image.png" alt="Anatomy of a File — interactive, annotated tours of source files" width="720" />
+  <img src="app/public/og-image.png" alt="AnatomyOf — interactive, annotated tours of source files" width="720" />
 </a>
 
 <p><em>An interactive, annotated tour of what's inside a source file — one language at a time.</em></p>
@@ -18,7 +18,7 @@
 
 ---
 
-**[Anatomy of a File](https://anatomyof.github.io)** opens an example source file in a code
+**[AnatomyOf](https://anatomyof.github.io)** opens an example source file in a code
 window with color-coded callouts explaining every structural part — shebang, imports, class
 definitions, control flow, and more. **Hover** a callout to trace it into the code; **click**
 it for an in-depth writeup. Every language ships a **minimal** and a **verbose** example,
@@ -96,7 +96,7 @@ Everything is data-driven — one file per language in `app/src/data/`:
 
 <div align="center">
   <br />
-  <a href="https://anatomyof.github.io"><img src="app/public/apple-touch-icon.png" alt="Anatomy of a File" width="48" /></a>
+  <a href="https://anatomyof.github.io"><img src="app/public/apple-touch-icon.png" alt="AnatomyOf" width="48" /></a>
   <br /><br />
   <sub>Built by <a href="https://lunarwerx.com"><b>LunarWerx</b></a> · Deployed on GitHub Pages</sub>
 </div>

@@ -73,7 +73,7 @@ function toggleTheme() {
       <BrandMark class="size-5 shrink-0 text-zinc-900 dark:text-zinc-100" />
       <div class="min-w-0">
         <div class="truncate text-sm font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
-          Anatomy of a File
+          AnatomyOf
         </div>
         <div class="text-[11px] text-zinc-500 dark:text-zinc-400">interactive edition</div>
       </div>

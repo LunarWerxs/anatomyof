@@ -34,7 +34,7 @@ const mark = paths.map((d) => `    <path d="${d}" />`).join('\n')
 writeFileSync(
   'src/components/BrandMark.vue',
   `<script setup lang="ts">
-// The Anatomy-of-a-File logo mark ({ brace + ribcage). Monochrome: fills with
+// The AnatomyOf logo mark ({ brace + ribcage). Monochrome: fills with
 // currentColor, so callers set the color via a text-* class and it adapts to
 // light/dark. Source of truth: public/logo.svg (regenerate via scripts/gen-brand).
 </script>
@@ -56,7 +56,7 @@ ${mark}
 const f = fit(64, 12)
 writeFileSync(
   'public/favicon.svg',
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Anatomy of a File">
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AnatomyOf">
   <rect width="64" height="64" rx="14" fill="#0f172a" />
   <g fill="#f8fafc" transform="translate(${f.x} ${f.y}) scale(${f.scale})">
 ${paths.map((d) => `    <path d="${d}" />`).join('\n')}

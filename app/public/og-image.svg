@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Anatomy of a File">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="AnatomyOf">
   <rect width="1200" height="630" fill="#0b0c0f"/>
   <!-- graph paper -->
   <g stroke="#94a3b8" stroke-opacity="0.07" stroke-width="1">
@@ -16,7 +16,7 @@
   </g>
 
   <!-- title -->
-  <text x="96" y="330" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="88" font-weight="800" letter-spacing="-2" fill="#fafafa">Anatomy of a File</text>
+  <text x="96" y="330" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="88" font-weight="800" letter-spacing="-2" fill="#fafafa">AnatomyOf</text>
   <text x="98" y="392" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="34" font-weight="500" fill="#94a3b8">Interactive, annotated tours of source files — one language at a time.</text>
 
   <!-- accent chips -->
