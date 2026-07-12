@@ -2,8 +2,8 @@
 """Start the Anatomy-of-a-File dev server and open it in a browser.
 
 Usage:
-    python run.py          # start dev server, open http://localhost:5173
-    python run.py --build  # build for production and preview it instead
+    python scripts/run.py          # start dev server, open http://localhost:5173
+    python scripts/run.py --build  # build for production and preview it instead
 
 Requires Bun (https://bun.sh). Runs `bun install` on first launch if needed.
 """
@@ -20,7 +20,7 @@ import urllib.request
 import webbrowser
 from pathlib import Path
 
-APP_DIR = Path(__file__).resolve().parent / "app"
+APP_DIR = Path(__file__).resolve().parent.parent / "app"
 PORT = 5173
 URL = f"http://localhost:{PORT}"
 
