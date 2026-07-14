@@ -90,6 +90,14 @@ Everything is data-driven — one file per language in `app/src/data/`:
 > Brand assets (favicon, social card, in-app mark) are all generated from
 > `app/public/logo.svg` via `bun run scripts/gen-brand.ts`.
 
+## 🔒 Privacy
+
+On page load the site sends one anonymous visit ping to LunarWerx's own endpoint
+(`studio.connections.icu`) — a random visitor id kept in `localStorage`, nothing else. No
+cookies, no third-party trackers, no personal data; server-side it becomes a daily-uniques
+count (with coarse country) that expires after 90 days. Browsers signaling
+**Do Not Track** or **Global Privacy Control** are never pinged.
+
 ## 📄 License
 
 [MIT](LICENSE) © [LunarWerx](https://lunarwerx.com) — free to use, fork, and adapt.
