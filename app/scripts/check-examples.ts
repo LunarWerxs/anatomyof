@@ -20,7 +20,11 @@
  *
  *   bun run check:examples
  */
-import { languages } from '../src/data'
+import { loaders } from '../src/data/catalog.generated'
+
+// The browser `languages` export is now lightweight metadata; load the FULL definitions
+// (annotations + examples) via the generated loaders so this data lint can inspect them.
+const languages = await Promise.all(Object.values(loaders).map((load) => load()))
 
 type Finding = { entry: string; where: string; detail: string }
 const findings: Finding[] = []

@@ -4,11 +4,11 @@ import { Moon, Search, Sparkles, Sun, X } from 'lucide-vue-next'
 import { TabsList, TabsRoot, TabsTrigger } from 'reka-ui'
 import { computed, ref } from 'vue'
 import { comingSoon } from '../data/comingSoon'
-import type { LanguageDef } from '../lib/types'
+import type { LanguageMeta } from '../lib/types'
 import BrandMark from './BrandMark.vue'
 import SuggestDialog from './SuggestDialog.vue'
 
-const props = defineProps<{ languages: LanguageDef[] }>()
+const props = defineProps<{ languages: LanguageMeta[] }>()
 
 const model = defineModel<string>({ required: true })
 

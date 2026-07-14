@@ -9,7 +9,11 @@
  * timeout can be a false positive — eyeball the list rather than trusting it
  * blindly.
  */
-import { languages } from '../src/data'
+import { loaders } from '../src/data/catalog.generated'
+
+// The browser `languages` export is now lightweight metadata; load the FULL definitions
+// (officialUrl + annotations' learnMore) via the generated loaders to collect every URL.
+const languages = await Promise.all(Object.values(loaders).map((load) => load()))
 
 const urls = new Set<string>()
 for (const lang of languages) {

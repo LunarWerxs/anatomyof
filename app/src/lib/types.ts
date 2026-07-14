@@ -102,6 +102,16 @@ export interface LanguageDef {
   mockup?: 'website' | 'settings' | 'mobileapp' | 'dashboard' | 'email'
 }
 
+/**
+ * The lightweight slice of a LanguageDef the sidebar and router need for EVERY
+ * language — everything except the heavy `annotations` and `examples`, which load
+ * on demand (see data/catalog.generated.ts + data/index.ts's loadLanguage()).
+ */
+export type LanguageMeta = Pick<
+  LanguageDef,
+  'id' | 'name' | 'category' | 'popularity' | 'accentHex' | 'extensions'
+>
+
 /** An annotation with its computed 1-indexed inclusive line ranges. */
 export type ResolvedAnnotation = AnnotationDef & {
   ranges: Array<[number, number]>
