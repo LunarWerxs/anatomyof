@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppSidebar from './components/AppSidebar.vue'
 import BrandMark from './components/BrandMark.vue'
+import { useSmoothScroll } from './composables/useSmoothScroll'
 import { defaultLanguage, languages } from './data'
 
 const repoUrl = 'https://github.com/LunarWerxs/anatomyof'
@@ -21,6 +22,11 @@ const selectedId = computed({
     router.push(`/${id}/${variant}`)
   },
 })
+
+// Eased momentum scrolling for the main content area (softens the sticky cards).
+const scrollEl = ref<HTMLElement | null>(null)
+const contentEl = ref<HTMLElement | null>(null)
+useSmoothScroll(scrollEl, contentEl)
 
 // Off-canvas drawer on mobile; static sidebar on md+.
 const sidebarOpen = ref(false)
@@ -91,8 +97,10 @@ watch(
         </a>
       </div>
 
-      <div class="graph-paper slim-scrollbar min-h-0 flex-1 overflow-y-auto">
-        <RouterView />
+      <div ref="scrollEl" class="graph-paper slim-scrollbar min-h-0 flex-1 overflow-y-auto">
+        <div ref="contentEl">
+          <RouterView />
+        </div>
       </div>
     </main>
   </div>

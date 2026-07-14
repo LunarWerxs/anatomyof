@@ -1,0 +1,13 @@
+# Normalize line endings to LF for all text files. Without this, Windows'
+# core.autocrlf checks files out as CRLF, which breaks LF-only tooling (biome's
+# `bun run check`) and churns diffs. git auto-detects binary files and leaves them alone.
+* text=auto eol=lf
+
+# Binary assets — never apply text/EOL filters.
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

@@ -130,6 +130,19 @@
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Lenis smooth scroll (see composables/useSmoothScroll). Lenis adds these classes
+   to the scroll wrapper; turn off native smooth-scroll while it drives the wrapper
+   so the two don't fight, and let any opted-out subtree keep its own scroll. */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 /* Code content crossfade. Opacity only — NO vertical translate: the code
    lines must not slide while fading, or the connector lines (which anchor to
    line positions) chase the moving text and appear to stutter/snap. */
