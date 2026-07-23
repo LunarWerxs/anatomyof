@@ -8,3 +8,6 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Generated agent code map (local artifact; rebuild with ~/.claude/tools/codemap.py)
+.claude/codemap/
