@@ -10,7 +10,7 @@ export const csharp: LanguageDef = {
   accentHex: '#68217a',
   officialUrl: 'https://learn.microsoft.com/en-us/dotnet/csharp/',
   shikiLang: 'csharp',
-  note: 'C# is a modern, object-oriented, and type-safe programming language derived from C and C++, running on the .NET platform.',
+  note: 'C# is a modern, object-oriented, type-safe programming language in the C-family, designed for the .NET platform.',
   annotations: [
     {
       id: 'using',

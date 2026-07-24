@@ -37,7 +37,7 @@ export const objectivec: LanguageDef = {
       title: 'Interface declaration',
       body: "Defines a class's public API with `@interface`, inheriting from a superclass.",
       details:
-        "`@interface Person : NSObject { ... }` opens a class declaration named `Person`, inheriting from `NSObject`, the root class most Objective-C objects ultimately descend from. Everything between `@interface` and the matching `@end` — ivars, property declarations, and method signatures — makes up the class's public interface, conventionally placed in a `.h` header so other files can `#import` it.\n\nObjective-C supports single inheritance only, mirroring C++'s simplicity trade-off in the opposite direction: a class has exactly one superclass, and shared behavior across unrelated hierarchies is instead achieved with protocols, Objective-C's answer to interfaces.",
+        "`@interface Person : NSObject { ... }` opens a class declaration named `Person`, inheriting from `NSObject`, the root class most Objective-C objects ultimately descend from. Everything between `@interface` and the matching `@end` — ivars, property declarations, and method signatures — makes up the class's public interface, conventionally placed in a `.h` header so other files can `#import` it.\n\nObjective-C supports single class inheritance: a class has exactly one superclass. Shared contracts across unrelated hierarchies are expressed with protocols, while categories can add methods to an existing class without subclassing it.",
       learnMore:
         'https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html',
       color: 'sky',
@@ -57,7 +57,7 @@ export const objectivec: LanguageDef = {
     {
       id: 'property',
       title: 'Property declaration',
-      body: 'Auto-generates accessor methods and manages memory with `@property`.',
+      body: 'Declares accessor methods and ownership semantics; modern compilers normally synthesize their implementation.',
       details:
         "`@property (nonatomic, strong) NSString *name;` declares a property and asks the compiler to synthesize `-name` and `-setName:` accessor methods plus a backing `_name` ivar, all without writing a line of implementation. The parenthesized attributes configure the generated accessors: `nonatomic` skips the overhead of thread-safe locking (the default, `atomic`, adds it), and `strong` tells Automatic Reference Counting to retain the object for as long as this property holds it.\n\nOther common attributes include `weak` (a non-owning reference that zeroes itself out when the object is deallocated, avoiding retain cycles) and `copy` (favored for `NSString` so a mutable string handed in later can't change value out from under you). `@synthesize` used to be required to wire a property to its ivar; the compiler has generated it implicitly since Xcode 4.4.",
       learnMore:

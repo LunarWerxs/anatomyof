@@ -76,6 +76,10 @@ export function getHighlighter() {
         import('@shikijs/langs/wasm'),
         import('@shikijs/langs/sql'),
         import('@shikijs/langs/bash'),
+        import('@shikijs/langs/pascal'),
+        import('@shikijs/langs/ada'),
+        import('@shikijs/langs/prolog'),
+        import('@shikijs/langs/common-lisp'),
       ],
       engine: createJavaScriptRegexEngine(),
     })

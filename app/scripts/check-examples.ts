@@ -12,9 +12,9 @@
  *      C-style block comments, or a lone hash) are NOT reliable signals and are
  *      intentionally omitted.
  *
- *   2. Ref integrity — every `refs` entry on an example segment must name an
- *      annotation that exists in the same entry (a dangling ref draws a
- *      connector line pointing at nothing), and annotation ids must be unique.
+ *   2. Definition integrity — annotation ids must be unique, every `refs` entry
+ *      must name an annotation in the same entry, every annotation must be used,
+ *      and language examples must provide both non-empty variants.
  *
  * Deterministic and offline, so it runs as part of `bun run check`.
  *
@@ -82,10 +82,23 @@ for (const lang of languages) {
   // concept mockups render a live UI, not code examples — nothing more to lint
   if (!lang.examples) continue
 
+  for (const variant of ['minimal', 'verbose'] as const) {
+    if (!lang.examples[variant]?.length) {
+      findings.push({
+        entry: lang.name,
+        where: variant,
+        detail: 'missing or empty example variant',
+      })
+    }
+  }
+
+  const referencedIds = new Set<string>()
+
   for (const [variant, segments] of Object.entries(lang.examples)) {
     segments.forEach((seg, i) => {
       // dangling refs
       for (const ref of seg.refs ?? []) {
+        referencedIds.add(ref)
         if (!annotationIds.has(ref)) {
           findings.push({
             entry: lang.name,
@@ -112,6 +125,16 @@ for (const lang of languages) {
       }
     })
   }
+
+  for (const id of annotationIds) {
+    if (!referencedIds.has(id)) {
+      findings.push({
+        entry: lang.name,
+        where: `annotation "${id}"`,
+        detail: 'annotation is never referenced by either example variant',
+      })
+    }
+  }
 }
 
 if (findings.length > 0) {
@@ -121,4 +144,6 @@ if (findings.length > 0) {
   }
   process.exit(1)
 }
-console.log(`✓ examples clean across ${languages.length} entries (foreign-syntax + ref integrity)`)
+console.log(
+  `✓ examples clean across ${languages.length} entries (foreign-syntax + definition integrity)`,
+)

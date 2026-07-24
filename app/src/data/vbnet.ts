@@ -113,7 +113,7 @@ export const vbnet: LanguageDef = {
     {
       id: 'conditional',
       title: 'Control flow (conditional)',
-      body: 'Executes code repeatedly or conditionally (`If`, `Select Case`).',
+      body: 'Selects which code to execute based on a condition (`If`, `Select Case`).',
       details:
         '`If ... Then ... Else ... End If` routes execution based on a `Boolean` condition. The single-line form (`If x Then y`) omits `End If` entirely, while the block form spanning multiple lines requires it — a frequent source of confusion for newcomers copy-pasting snippets between the two styles.\n\n`Select Case` handles multi-branch dispatch more cleanly than a chain of `ElseIf`s, supporting single values, ranges (`Case 1 To 5`), and comma-separated lists (`Case 1, 3, 5`) per `Case` clause.',
       learnMore:

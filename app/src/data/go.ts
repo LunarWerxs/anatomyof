@@ -87,7 +87,7 @@ export const go: LanguageDef = {
       title: 'Main function',
       body: 'The entry point for a Go application (`func main`).',
       details:
-        'When a program is built from `package main`, execution begins at `func main()`. It takes no parameters and returns nothing; the process exits with status 0 when `main` returns normally, or a nonzero status if the program calls `os.Exit` with another value or panics.\n\nUnlike some languages, Go allows only one `main` function per program, and it cannot be called directly from elsewhere in the code. Any setup logic that must run once at startup — flag parsing, opening a database connection, wiring dependencies — typically lives at the top of `main` or in `init` functions that run before it.',
+        'When a program is built from `package main`, execution begins at `func main()`. It takes no parameters and returns nothing; the process exits with status 0 when `main` returns normally, or a nonzero status if the program calls `os.Exit` with another value or panics.\n\nThe main package declares one package-level `main` function. It is syntactically callable like another function, but doing so simply invokes it again and does not create a second entry point. Startup logic such as flag parsing and dependency wiring typically lives in `main` or in `init` functions that run before it.',
       learnMore: 'https://go.dev/ref/spec#Program_execution',
       color: 'red',
       side: 'left',

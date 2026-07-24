@@ -104,8 +104,8 @@ export const html: LanguageDef = {
     },
     {
       id: 'block-level',
-      title: 'Block-level elements',
-      body: 'Elements that start on a new line and take up full width (<h1>, <p>, <ul>, <li>, ...).',
+      title: 'Block-level defaults',
+      body: 'Elements whose default CSS layout starts a new block, such as `<h1>`, `<p>`, and `<ul>`.',
       details:
         'A block-level element, by default, starts on its own line and stretches to fill the width of its container, stacking vertically with its siblings. Headings (`<h1>`-`<h6>`), paragraphs (`<p>`), lists (`<ul>`, `<ol>`, `<li>`), and container elements like `<div>` and the semantic elements are all block-level by default.\n\nThis is CSS `display` behavior, not a fixed HTML property — `display: inline` or `display: flex` can change how any element lays out regardless of its default. The block/inline distinction is nonetheless a useful mental model for predicting how unstyled markup will flow.',
       learnMore: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements',
@@ -114,8 +114,8 @@ export const html: LanguageDef = {
     },
     {
       id: 'inline-elements',
-      title: 'Inline elements',
-      body: 'Elements that do not start on a new line, taking only necessary width (<a>, <img>, ...).',
+      title: 'Inline defaults',
+      body: 'Elements whose default CSS layout flows within surrounding text, such as `<a>`, `<span>`, and `<img>`.',
       details:
         "An inline element flows within the surrounding text instead of breaking onto its own line, taking up only as much width as its content needs. `<a>` (links), `<img>` (images), `<span>`, `<strong>`, and `<em>` are all inline by default, which is why a sentence can contain a link in the middle without disrupting the paragraph's line breaks.\n\nInline elements generally ignore top/bottom `margin` and `height` in ways block elements do not, since they are meant to sit inside a line box rather than define one. `<img>` is a notable exception in that it behaves like inline content but still respects width and height for the image's intrinsic dimensions.",
       learnMore: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements',

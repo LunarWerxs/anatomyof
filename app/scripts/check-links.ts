@@ -54,7 +54,10 @@ async function probe(url: string): Promise<number | string> {
 const BOT_BLOCKED_HOSTS = ['mathworks.com', 'clojure.org']
 const skipped: Array<{ url: string; status: string }> = []
 
-function isBotBlocked(url: string, status: string): boolean {
+function isUnavailableToChecker(url: string, status: string): boolean {
+  // 429 means the server is rate-limiting this concurrent audit, not that the
+  // destination is dead. Keep it visible for manual review without failing.
+  if (status === '429') return true
   if (status !== '403') return false
   try {
     const host = new URL(url).hostname
@@ -70,7 +73,7 @@ async function worker() {
     const result = await probe(url)
     if (typeof result === 'string' || result >= 400) {
       const entry = { url, status: String(result) }
-      if (isBotBlocked(url, entry.status)) skipped.push(entry)
+      if (isUnavailableToChecker(url, entry.status)) skipped.push(entry)
       else dead.push(entry)
     }
   }
@@ -80,7 +83,7 @@ await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()))
 
 if (skipped.length > 0) {
   console.log(
-    `\n⚠ ${skipped.length} link(s) skipped (block automated checks — verify in a browser):`,
+    `\n⚠ ${skipped.length} link(s) skipped (blocked or rate-limited — verify in a browser):`,
   )
   for (const s of skipped.sort((a, b) => a.url.localeCompare(b.url))) {
     console.log(`  [${s.status}] ${s.url}`)

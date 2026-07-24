@@ -28,14 +28,14 @@ export const clojure: LanguageDef = {
       body: 'Documentation for a namespace or function.',
       details:
         "A string literal placed right after the name in `ns`, `def`, or `defn` becomes that var's docstring, retrievable at the REPL with `(doc my-fn)` or by inspecting the var's metadata map under the `:doc` key. Multi-line docstrings are just regular Clojure strings, so newlines are written literally between the quotes.\n\nDocstrings are metadata, not comments — they are compiled into the running program and available for tooling like `clojure.repl/doc`, cider, or generated API docs, whereas a `;` comment is stripped before the reader ever sees it.",
-      learnMore: 'https://clojure.org/reference/docstrings',
+      learnMore: 'https://clojure.org/reference/vars#_var_metadata',
       color: 'sky',
       side: 'right',
     },
     {
       id: 'comment',
       title: 'Comment',
-      body: 'Single-line (`;`) or block form, ignored by the compiler.',
+      body: 'Uses `;` for line comments; `(comment ...)` is a read but unevaluated scratch form, not true comment syntax.',
       details:
         'A semicolon `;` starts a line comment that runs to the end of the line; everything after it is invisible to the reader, the part of Clojure that turns text into data before evaluation even begins. Two or three semicolons are a style convention for emphasis, not a different syntax.\n\nThe `(comment ...)` special form is a different beast: it is a real form the reader parses like any other, but it macro-expands to `nil` and never evaluates its body. That makes it a popular "rich comment block" for stashing scratch expressions you want to `eval` individually at the REPL without them running when the file loads.',
       learnMore: 'https://clojure.org/reference/reader#_comments',
@@ -206,7 +206,7 @@ export const clojure: LanguageDef = {
       },
       { code: '' },
       {
-        code: '(comment ; Rich comment block (ignored by compiler, executable in REPL)\n  (greet "World") ; => "Hello, World! -- works on every machine, including production"\n  (helper-fn 42))',
+        code: '(comment ; Rich scratch form: read normally, body not evaluated, result is nil\n  (greet "World") ; => "Hello, World! -- works on every machine, including production"\n  (helper-fn 42))',
         refs: ['comment'],
       },
     ],

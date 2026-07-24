@@ -25,7 +25,7 @@ export const bash: LanguageDef = {
     {
       id: 'comment',
       title: 'Comment',
-      body: "Single-line (`#`) or multi-line block (`: <<'...' ...`), ignored by the interpreter.",
+      body: 'Uses `#` for a real line comment; a quoted here-document fed to `:` is a common no-op workaround for blocks.',
       details:
         "A `#` starts a comment that runs to the end of the line; everything after it is ignored. Bash has no dedicated block-comment syntax, so multi-line comments are usually faked with a here-document attached to the no-op `:` builtin, e.g. `: <<'END_COMMENT' ... END_COMMENT`.\n\nQuoting the delimiter (`'END_COMMENT'` rather than `END_COMMENT`) prevents the shell from performing variable expansion or command substitution inside the block, so arbitrary text — including `$` and backticks — can sit there safely without being interpreted.",
       learnMore: 'https://www.gnu.org/software/bash/manual/bash.html#Here-Documents',

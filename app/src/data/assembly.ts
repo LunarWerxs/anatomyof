@@ -67,7 +67,7 @@ export const assembly: LanguageDef = {
       title: 'Instruction (Mnemonic)',
       body: 'An operation for the CPU to perform.',
       details:
-        'A mnemonic like `mov`, `add`, or `int` is a human-readable stand-in for a raw opcode byte the CPU actually decodes -- `mov eax, 4` might assemble to `b8 04 00 00 00`. The assembler\'s whole job is this one-to-one (or occasionally one-to-few) translation from mnemonic-plus-operands to machine code, which is exactly why assembly is considered the thinnest possible layer over "what the chip really does."\n\nInstruction sets are architecture-specific: x86 and ARM share no mnemonics, no register names, and no calling conventions. Code written for one will not run on, or even resemble, code written for the other.',
+        'A mnemonic like `mov`, `add`, or `int` is a human-readable stand-in for a raw opcode byte the CPU actually decodes -- `mov eax, 4` might assemble to `b8 04 00 00 00`. The assembler\'s whole job is this one-to-one (or occasionally one-to-few) translation from mnemonic-plus-operands to machine code, which is exactly why assembly is considered the thinnest possible layer over "what the chip really does."\n\nInstruction sets are architecture-specific. x86 and ARM may use a few familiar English-like mnemonic names, but their encodings, registers, operand rules, and calling conventions differ; code assembled for one architecture will not run on the other.',
       learnMore: 'https://en.wikipedia.org/wiki/X86_instruction_listings',
       color: 'purple',
       side: 'left',

@@ -10,7 +10,7 @@ export const javascript: LanguageDef = {
   accentHex: '#ca8a04',
   officialUrl: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
   shikiLang: 'javascript',
-  note: 'JavaScript is a high-level, interpreted programming language primarily used for adding interactivity to web pages.',
+  note: 'JavaScript is a high-level, general-purpose language used across browsers, servers, command-line tools, and embedded runtimes; modern engines commonly combine interpretation with just-in-time compilation.',
   annotations: [
     {
       id: 'comment',

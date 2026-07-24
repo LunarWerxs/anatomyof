@@ -17,7 +17,7 @@ export const java: LanguageDef = {
       title: 'Package declaration',
       body: 'Defines the namespace for the class.',
       details:
-        'A `package` statement, when present, must be the first non-comment line in the file. It groups related classes under a dotted namespace such as `com.example.anatomy`, which also has to match the directory the source file lives in — `com/example/anatomy/JavaAnatomy.java`. This lets two classes named the same thing coexist as long as they sit in different packages.\n\nClasses in the same package can reference each other without an import. Omitting the package statement entirely places the class in the unnamed "default package," which works for small experiments but is disallowed by most real projects because it cannot be imported from anywhere else.',
+        'A `package` statement, when present, must be the first non-comment declaration in the file. It groups related classes under a dotted namespace such as `com.example.anatomy`. Source trees conventionally mirror that name as `com/example/anatomy/JavaAnatomy.java`, and build tools generally expect the layout, though `javac` itself can compile an explicitly named source file from another location.\n\nClasses in the same package can reference each other without an import. Omitting the package statement entirely places the class in the unnamed "default package," which works for small experiments but is avoided by most real projects because named packages cannot import from it.',
       learnMore: 'https://docs.oracle.com/javase/tutorial/java/package/packages.html',
       color: 'slate',
       side: 'left',
@@ -107,7 +107,7 @@ export const java: LanguageDef = {
       title: 'Object instantiation',
       body: 'Creates a new instance of a class with `new`.',
       details:
-        '`new JavaAnatomy("Java Learner")` allocates memory for a fresh object on the heap, then runs the matching constructor to initialize it, and finally evaluates to a reference to that new object. Every object in Java — apart from the primitive types (`int`, `boolean`, `double`, and so on) — is created this way, whether it is a custom class or a built-in one like `ArrayList<>()`.\n\nBecause objects live on the heap and are accessed through references rather than copied by value, assigning one variable to another (`JavaAnatomy a = demo;`) copies the reference, not the object — both variables then point at the same instance. Unused objects are reclaimed automatically by the JVM\'s garbage collector; Java has no manual `free` or `delete`.',
+        '`new JavaAnatomy("Java Learner")` allocates memory for a fresh object on the heap, then runs the matching constructor to initialize it, and finally evaluates to a reference to that new object. `new` is the normal explicit construction syntax for classes and arrays, while factories, literals, reflection, deserialization, and boxing can also produce object references without showing `new` at the call site.\n\nBecause objects live on the heap and are accessed through references rather than copied by value, assigning one variable to another (`JavaAnatomy a = demo;`) copies the reference, not the object — both variables then point at the same instance. Unused objects are reclaimed automatically by the JVM\'s garbage collector; Java has no manual `free` or `delete`.',
       learnMore: 'https://docs.oracle.com/javase/tutorial/java/javaOO/objectcreation.html',
       color: 'indigo',
       side: 'left',
@@ -155,8 +155,8 @@ export const java: LanguageDef = {
       },
       { code: '' },
       {
-        code: '    public static void main(String[] args) {\n        // AbstractFactoryFactory not required for this one\n        Counter counter = new Counter();\n        ArrayList<Integer> values = new ArrayList<>();\n        values.add(5);\n        counter.addAll(values);\n        System.out.println(counter.total); // 5 lines to add one number\n    }',
-        refs: ['main-method', 'variable', 'object-creation', 'method-call'],
+        code: '    public static void main(String[] args) {\n        // AbstractFactoryFactory not required for this one\n        Counter counter = new Counter();\n        ArrayList<Integer> values = new ArrayList<>();\n        values.add(5);\n        counter.addAll(values);\n        System.out.println(counter.total); // 5 lines to add one number\n    }\n}',
+        refs: ['class', 'main-method', 'variable', 'object-creation', 'method-call'],
       },
     ],
     verbose: [

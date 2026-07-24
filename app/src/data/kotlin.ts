@@ -10,7 +10,7 @@ export const kotlin: LanguageDef = {
   accentHex: '#7f52ff',
   officialUrl: 'https://kotlinlang.org/',
   shikiLang: 'kotlin',
-  note: 'Kotlin is a modern, concise, and safe programming language that interoperates fully with Java, running on the JVM.',
+  note: 'Kotlin is a modern, concise, statically typed language with first-class JVM and Android support plus JavaScript, WebAssembly, and native compilation targets.',
   annotations: [
     {
       id: 'package',

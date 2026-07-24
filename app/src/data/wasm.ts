@@ -10,7 +10,7 @@ export const wasm: LanguageDef = {
   accentHex: '#654ff0',
   officialUrl: 'https://webassembly.org/',
   shikiLang: 'wasm',
-  note: 'WebAssembly (Wasm) is a binary instruction format for a stack-based virtual machine, designed as a portable target for compilation of high-level languages like C, C++, and Rust, enabling near-native performance on the web.',
+  note: 'WebAssembly (Wasm) is a portable binary instruction format for a stack machine; these examples use its equivalent human-readable WebAssembly Text (WAT) representation.',
   annotations: [
     {
       id: 'module',

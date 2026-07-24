@@ -15,7 +15,7 @@ export const typescript: LanguageDef = {
     {
       id: 'comment',
       title: 'Comment',
-      body: 'Block (`/* ... */`), ignored by the compiler.',
+      body: 'Single-line (`//`) or block (`/* ... */`), ignored by the compiler.',
       details:
         'A block comment starts with `/*` and ends at the first `*/`, and may span any number of lines in between; a single-line `//` comment is also available and runs to the end of the line. Both are stripped during compilation and have zero effect on the emitted JavaScript or on runtime behavior.\n\nBlock comments cannot be nested — the first `*/` closes the comment even if another `/*` appears inside it. A `/** ... */` doc comment placed directly above a declaration is picked up by editors as JSDoc, surfacing parameter hints and descriptions in autocomplete even though TypeScript itself ignores the tags for type-checking.',
       learnMore: 'https://jsdoc.app/',

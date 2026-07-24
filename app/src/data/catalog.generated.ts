@@ -5,6 +5,7 @@ import type { LanguageDef, LanguageMeta } from '../lib/types'
 /** Lightweight metadata for every language/concept — enough for the sidebar and route
  *  validation, WITHOUT the heavy annotations/examples (those load via `loaders` below). */
 export const catalog: LanguageMeta[] = [
+  {"id":"ada","name":"Ada","category":"language","accentHex":"#059669","extensions":[".adb",".ads"],"popularity":16},
   {"id":"assembly","name":"Assembly","category":"language","accentHex":"#8b5a2b","extensions":[".asm",".s"],"popularity":17},
   {"id":"awk","name":"AWK","category":"language","accentHex":"#1e8449","extensions":[".awk"],"popularity":57},
   {"id":"bash","name":"Shell (Bash)","category":"language","accentHex":"#4eaa25","extensions":[".sh"],"popularity":51},
@@ -12,6 +13,7 @@ export const catalog: LanguageMeta[] = [
   {"id":"c","name":"C","category":"language","accentHex":"#5a92cf","extensions":[".c",".h"],"popularity":2},
   {"id":"clojure","name":"Clojure","category":"language","accentHex":"#5881d8","extensions":[".clj",".cljs"],"popularity":53},
   {"id":"cobol","name":"COBOL","category":"language","accentHex":"#1f6f8b","extensions":[".cbl",".cob"],"popularity":23},
+  {"id":"commonlisp","name":"Common Lisp","category":"language","accentHex":"#7c3aed","extensions":[".lisp",".lsp",".cl"],"popularity":33},
   {"id":"cpp","name":"C++","category":"language","accentHex":"#00599c","extensions":[".cpp",".hpp"],"popularity":3},
   {"id":"csharp","name":"C#","category":"language","accentHex":"#68217a","extensions":[".cs"],"popularity":5},
   {"id":"css","name":"CSS","category":"language","accentHex":"#2965f1","extensions":[".css"],"popularity":6.2},
@@ -35,9 +37,11 @@ export const catalog: LanguageMeta[] = [
   {"id":"nim","name":"Nim","category":"language","accentHex":"#cc9a06","extensions":[".nim"],"popularity":102},
   {"id":"objectivec","name":"Objective-C","category":"language","accentHex":"#438eff","extensions":[".m",".h"],"popularity":30},
   {"id":"ocaml","name":"OCaml","category":"language","accentHex":"#ec6813","extensions":[".ml",".mli"],"popularity":36},
+  {"id":"pascal","name":"Object Pascal","category":"language","accentHex":"#2563eb","extensions":[".pas",".pp"],"popularity":11},
   {"id":"perl","name":"Perl","category":"language","accentHex":"#39457e","extensions":[".pl",".pm"],"popularity":22},
   {"id":"php","name":"PHP","category":"language","accentHex":"#777bb4","extensions":[".php"],"popularity":14},
   {"id":"powershell","name":"PowerShell","category":"language","accentHex":"#2671be","extensions":[".ps1"],"popularity":45},
+  {"id":"prolog","name":"Prolog","category":"language","accentHex":"#e8790c","extensions":[".pl",".pro"],"popularity":24},
   {"id":"python","name":"Python","category":"language","accentHex":"#3776ab","extensions":[".py"],"popularity":1},
   {"id":"r","name":"R","category":"language","accentHex":"#276dc3","extensions":[".r",".R"],"popularity":9},
   {"id":"ruby","name":"Ruby","category":"language","accentHex":"#cc342d","extensions":[".rb"],"popularity":20},
@@ -56,6 +60,7 @@ export const catalog: LanguageMeta[] = [
 
 /** id -> lazy import of the FULL LanguageDef (its own chunk, loaded on selection). */
 export const loaders: Record<string, () => Promise<LanguageDef>> = {
+  "ada": () => import('./ada').then((m) => m.ada),
   "assembly": () => import('./assembly').then((m) => m.assembly),
   "awk": () => import('./awk').then((m) => m.awk),
   "bash": () => import('./bash').then((m) => m.bash),
@@ -63,6 +68,7 @@ export const loaders: Record<string, () => Promise<LanguageDef>> = {
   "c": () => import('./c').then((m) => m.c),
   "clojure": () => import('./clojure').then((m) => m.clojure),
   "cobol": () => import('./cobol').then((m) => m.cobol),
+  "commonlisp": () => import('./commonlisp').then((m) => m.commonLisp),
   "cpp": () => import('./cpp').then((m) => m.cpp),
   "csharp": () => import('./csharp').then((m) => m.csharp),
   "css": () => import('./css').then((m) => m.css),
@@ -86,9 +92,11 @@ export const loaders: Record<string, () => Promise<LanguageDef>> = {
   "nim": () => import('./nim').then((m) => m.nim),
   "objectivec": () => import('./objectivec').then((m) => m.objectivec),
   "ocaml": () => import('./ocaml').then((m) => m.ocaml),
+  "pascal": () => import('./pascal').then((m) => m.pascal),
   "perl": () => import('./perl').then((m) => m.perl),
   "php": () => import('./php').then((m) => m.php),
   "powershell": () => import('./powershell').then((m) => m.powershell),
+  "prolog": () => import('./prolog').then((m) => m.prolog),
   "python": () => import('./python').then((m) => m.python),
   "r": () => import('./r').then((m) => m.r),
   "ruby": () => import('./ruby').then((m) => m.ruby),

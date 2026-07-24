@@ -48,8 +48,7 @@ export const matlab: LanguageDef = {
       body: 'Divides code into executable sections for publishing/running.',
       details:
         'A comment line starting with `%%` marks a "code section" boundary. The Live Editor and desktop MATLAB editor recognize these and let you run just the section the cursor sits in (Ctrl+Enter) rather than the whole file, which is invaluable for iterating on a long analysis without re-running expensive earlier steps.\n\nSections also structure `publish()` output: each `%%`-delimited chunk becomes its own block in the generated HTML/PDF report, with the comment text on the same line rendered as that block\'s heading.',
-      learnMore:
-        'https://www.mathworks.com/help/matlab/matlab_prog/create-and-run-sections-in-code.html',
+      learnMore: 'https://www.mathworks.com/help/matlab/matlab_prog/create-and-run-sections.html',
       color: 'teal',
       side: 'left',
     },

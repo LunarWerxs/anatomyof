@@ -151,7 +151,7 @@ export const dart: LanguageDef = {
       { code: '}', refs: ['class'] },
       { code: '' },
       {
-        code: "void main() {\n  final w = Widget('Button');\n  print(w.describe()); // hot reload made this line free\n}",
+        code: "void main() {\n  final w = Widget('Button');\n  print(jsonEncode({'widget': w.describe()})); // hot reload made this line free\n}",
         refs: ['main-function', 'instantiation', 'call'],
       },
     ],

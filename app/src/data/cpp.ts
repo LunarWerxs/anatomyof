@@ -34,8 +34,8 @@ export const cpp: LanguageDef = {
     },
     {
       id: 'namespace',
-      title: 'Namespace declaration',
-      body: 'Brings symbols from a namespace into scope.',
+      title: 'Using directive',
+      body: 'Makes names from a namespace available without qualification.',
       details:
         'The entire standard library lives inside the `std` namespace, so `cout` is really `std::cout`. `using namespace std;` imports every name from `std` into the current scope, letting the rest of the file write `cout` and `string` instead of spelling out the prefix each time.\n\nIt is convenient for short programs and teaching examples, but real-world C++ code and header files generally avoid a blanket `using namespace std;` because it can silently introduce naming collisions as the standard library grows; a targeted `using std::cout;` or an explicit `std::` prefix is the safer habit.',
       learnMore: 'https://en.cppreference.com/w/cpp/language/namespace.html',

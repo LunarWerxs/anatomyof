@@ -31,7 +31,7 @@ that aren't code.
 
 ## ✨ Highlights
 
-- 🔬 **42 languages + 5 concept pages** — from Python and Rust to COBOL, AWK, and WebAssembly
+- 🔬 **46 languages + 5 concept pages** — from Python and Rust to Ada, Prolog, COBOL, and WebAssembly
 - 🎨 **Color-coded callouts** wired to the exact lines they describe
 - 🖱️ **Hover to trace, click to dive** — a full deep-dive modal per concept, with a *Learn more* link
 - 🌗 **Light & dark themes**, and **fully mobile-responsive** (tap to pin a callout, tap again to open it)
@@ -80,12 +80,11 @@ Everything is data-driven — one file per language in `app/src/data/`:
    identifier that an annotation references. 2–5 touches per language.
 2. Add the grammar import to `app/src/lib/highlighter.ts` (enforced by
    `scripts/check-grammars.ts`, which runs in `bun run build`/`check`).
-3. Register it in `app/src/data/index.ts` (add it to the `catalog` array and set a
-   `popularity` rank on the `LanguageDef`) and remove it from `comingSoon.ts`. The
-   catalog's array order is cosmetic — the sidebar's **Languages** group is sorted in
-   code by `popularity` (TIOBE Index position; lower = higher up, with a documented
-   convention for entries TIOBE can't rank). Concepts omit `popularity` and keep the
-   curated order they appear in.
+3. Set a `popularity` rank on the `LanguageDef` and remove it from `comingSoon.ts` if
+   applicable. Run `bun run gen:catalog` (also run automatically by `bun run build`) to
+   regenerate the catalog and lazy-loader map. The sidebar's **Languages** group is sorted
+   by `popularity` (TIOBE Index position; lower = higher up, with a documented convention
+   for entries TIOBE can't rank). Concepts omit `popularity` and keep their curated order.
 
 > Brand assets (favicon, social card, in-app mark) are all generated from
 > `app/public/logo.svg` via `bun run scripts/gen-brand.ts`.

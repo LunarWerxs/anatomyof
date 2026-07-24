@@ -10,7 +10,7 @@ export const scala: LanguageDef = {
   accentHex: '#dc322f',
   officialUrl: 'https://www.scala-lang.org/',
   shikiLang: 'scala',
-  note: 'Scala is a modern multi-paradigm programming language designed to express common programming patterns in a concise, elegant, and type-safe way, running on the JVM.',
+  note: 'Scala is a statically typed, multi-paradigm language that combines object-oriented and functional programming, most commonly targeting the JVM.',
   annotations: [
     {
       id: 'package',
@@ -94,11 +94,12 @@ export const scala: LanguageDef = {
     },
     {
       id: 'main-object',
-      title: 'Main object (extends App)',
-      body: 'The entry point for an executable application.',
+      title: 'Main method',
+      body: 'An explicit `main` method provides a cross-version executable entry point.',
       details:
-        'An `object` that extends the `App` trait runs its entire body as the program\'s main method — no explicit `def main(args: Array[String])` required, and `args` is available automatically as an inherited field. It is the fastest way to write a runnable Scala program, especially for scripts and small tools.\n\nThe trade-off is that `App` relies on the "delayed init" trick to run constructor statements as the body, which can behave subtly differently under the JVM\'s JIT than an explicit `def main`; production code and anything performance-sensitive typically defines `main` directly instead.',
-      learnMore: 'https://www.scala-lang.org/api/current/scala/App.html',
+        '`def main(args: Array[String]): Unit` inside a singleton `object` uses the conventional JVM entry signature and works across Scala 2 and Scala 3. The runtime calls it with the command-line arguments after loading the object.\n\nScala 3 also offers the concise `@main` annotation. The older `extends App` style has only limited support in Scala 3, no longer provides its previous delayed-initialization behavior, and is not the recommended cross-version entry pattern.',
+      learnMore:
+        'https://docs.scala-lang.org/scala3/reference/changed-features/main-functions.html',
       color: 'orange',
       side: 'left',
     },
@@ -142,22 +143,22 @@ export const scala: LanguageDef = {
       { code: '}' },
       { code: '' },
       {
-        code: 'object Main extends App {',
+        code: 'object Main {\n  def main(args: Array[String]): Unit = {',
         refs: ['main-object'],
       },
       {
-        code: '  val result = Dice.roll()',
+        code: '    val result = Dice.roll()',
         refs: ['instantiation'],
       },
       {
-        code: '  val verdict = if (result > 10) "critical hit" else "critical miss" // it is always a miss',
+        code: '    val verdict = if (result > 10) "critical hit" else "critical miss" // it is always a miss',
         refs: ['control-flow'],
       },
       {
-        code: '  println(s"You rolled $result: $verdict")',
+        code: '    println(s"You rolled $result: $verdict")',
         refs: ['string-interp'],
       },
-      { code: '}' },
+      { code: '  }\n}', refs: ['main-object'] },
     ],
     verbose: [
       { code: 'package com.example.scala // Package declaration', refs: ['package'] },
@@ -199,41 +200,47 @@ export const scala: LanguageDef = {
       { code: '  }', refs: ['class', 'method'] },
       { code: '}', refs: ['class'] },
       { code: '' },
-      { code: '// Main object (entry point) extends App trait', refs: ['main-object'] },
       {
-        code: 'object Main extends App {',
+        code: '// Explicit main method: portable across Scala 2 and Scala 3',
         refs: ['main-object'],
       },
-      { code: '  // Variable declaration', refs: ['main-object'] },
       {
-        code: '  val alice = new Person("Alice", 30) // Object instantiation',
+        code: 'object Main {\n  def main(args: Array[String]): Unit = {',
+        refs: ['main-object'],
+      },
+      { code: '    // Variable declaration', refs: ['main-object'] },
+      {
+        code: '    val alice = new Person("Alice", 30) // Object instantiation',
         refs: ['main-object', 'instantiation'],
       },
       { code: '' },
-      { code: '  // Method call', refs: ['main-object'] },
+      { code: '    // Method call', refs: ['main-object'] },
       {
-        code: '  println(alice.greet()) // Built-in function call',
+        code: '    println(alice.greet()) // Built-in function call',
         refs: ['main-object'],
       },
       { code: '' },
-      { code: '  // Control flow (conditional expression)', refs: ['main-object', 'control-flow'] },
       {
-        code: '  val status = if (alice.age > 25) "Adult" else "Young" // no ternary operator needed here',
+        code: '    // Control flow (conditional expression)',
+        refs: ['main-object', 'control-flow'],
+      },
+      {
+        code: '    val status = if (alice.age > 25) "Adult" else "Young" // no ternary operator needed here',
         refs: ['main-object', 'control-flow'],
       },
       { code: '' },
-      { code: '  // Control flow (loop over a range)', refs: ['main-object', 'control-flow'] },
+      { code: '    // Control flow (loop over a range)', refs: ['main-object', 'control-flow'] },
       {
-        code: '  for (i <- 1 to 3) {\n    println(s"Count: $i") // Scala counts, unlike some of my coworkers, inclusively',
+        code: '    for (i <- 1 to 3) {\n      println(s"Count: $i") // Scala counts, unlike some of my coworkers, inclusively',
         refs: ['main-object', 'control-flow', 'string-interp'],
       },
-      { code: '  }', refs: ['main-object', 'control-flow'] },
+      { code: '    }', refs: ['main-object', 'control-flow'] },
       { code: '' },
       {
-        code: '  println(s"App Version: ${AppConfig.version}") // Accessing singleton object field',
+        code: '    println(s"App Version: ${AppConfig.version}") // Accessing singleton object field',
         refs: ['main-object', 'string-interp', 'object'],
       },
-      { code: '}', refs: ['main-object'] },
+      { code: '  }\n}', refs: ['main-object'] },
     ],
   },
 }
